@@ -12,14 +12,32 @@ const getStudentById = (req, res) => {
 };
 
 const postStudents = async (req, res) => {
-    res.send("student post" + req.body);
-
-    const student = await Student.create(req.data);
-    res.status(201).send();
+    console.log("student post");
+    try{
+        const student = await Student.create(req.body);
+        res.status(201).send(student);
+    } catch (error) {
+        res.status(400).send(error.massage);
+    }
 };
 
-const putStudents = (req, res) => {
-    res.send("student put");
+const myfunc = () => {
+    const rs = new Promise((resolve, reject) => {
+        console.log('myfunc');
+        resolve('ok');
+    });
+    return rs;
+};
+
+const putStudents =  (req, res) => {
+    myfunc().then((rs) => {
+        console.log(rs);
+        res.send("student put");
+    }).catch((error) => {
+        console.log(error);
+    });
+
+    
 };
 
 const deleteStudents = (req, res) => {
