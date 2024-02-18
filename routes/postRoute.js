@@ -1,18 +1,26 @@
 const { Router } = require("express");
 const router = express.Router();
 
-Router.post("/", (req, res) => {
-    res.send("post");
-});
-
 Router.get("/", (req, res) => {
-    res.send("get");
+    res.send("post get");
 });
 
-Router.put("/", (req, res) => {
-    res.send("put");
+Router.get("/:id", (req, res) => {
+    res.send("post get by id");
+});
+
+Router.post("/", (req, res) => {
+    res.send("post post");
+});
+
+
+
+Router.put("/:id", (req, res) => {
+    res.send("post put");
 });
 
 Router.delete("/:id", (req, res) => {
-    res.send("delete");
+    res.send("post delete");
 });
+
+module.exports = router;
