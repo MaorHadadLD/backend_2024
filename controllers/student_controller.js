@@ -2,8 +2,14 @@ const Student = require('../models/student_model');
 
 
 const getStudents = async (req, res) => {
-    console.log('getStudent')
-
+    console.log('getStudent');
+    try {
+        const students = await Student.find();
+        res.status(200).send(students);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error.message);
+    } 
 };
 
 const getStudentById = (req, res) => {
@@ -21,23 +27,9 @@ const postStudents = async (req, res) => {
     }
 };
 
-const myfunc = () => {
-    const rs = new Promise((resolve, reject) => {
-        console.log('myfunc');
-        resolve('ok');
-    });
-    return rs;
-};
 
-const putStudents =  (req, res) => {
-    myfunc().then((rs) => {
-        console.log(rs);
-        res.send("student put");
-    }).catch((error) => {
-        console.log(error);
-    });
-
-    
+const putStudents = (req, res) => {
+    res.send("student put");
 };
 
 const deleteStudents = (req, res) => {
