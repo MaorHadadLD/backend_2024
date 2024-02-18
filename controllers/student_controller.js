@@ -4,13 +4,13 @@ const Student = require('../models/student_model');
 const getStudents = async (req, res) => {
     console.log('getStudent');
     try {
+        let students;
         if (req.query.name) {
-            const students = await Student.find({name: req.query.name});
-            res.status(200).send(students);
+           students = await Student.find({name: req.query.name});
         } else {
-        const students = await Student.find();
-        res.status(200).send(students);
+            students = await Student.find();
         }
+        res.status(200).send(students);
     } catch (error) {
         console.log(error);
         res.status(400).send(error.message);
