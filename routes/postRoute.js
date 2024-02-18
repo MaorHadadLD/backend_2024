@@ -10,7 +10,7 @@ Router.get("/:id", (req, res) => {
 });
 
 Router.post("/", (req, res) => {
-    res.send("post post");
+    res.send("post post" + req.body);
 });
 
 

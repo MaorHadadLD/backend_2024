@@ -6,9 +6,9 @@ router.get("/", StudentController.getStudents);
 
 router.get("/:id", StudentController.getStudentById);
 
-router.post("/", StudentController.createStudent);
+router.post("/", StudentController.postStudents);
 
-router.put("/", StudentController.updateStudent);
+router.put("/:id", StudentController.putStudents);
 
 router.delete("/:id", StudentController.deleteStudents);
 

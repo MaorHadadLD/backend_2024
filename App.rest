@@ -1,6 +1,6 @@
 ###
 
-GET http://localhost:3000/student
+GET http://localhost:3000/student/12345
 
 
 ###
