@@ -1,5 +1,9 @@
-const getStudents = (req, res) => {
-    res.send("student get");
+const Student = require('../models/student_model');
+
+
+const getStudents = async (req, res) => {
+    console.log('getStudent')
+    
 };
 
 const postStudents = (req, res) => {

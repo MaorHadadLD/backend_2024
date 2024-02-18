@@ -11,7 +11,8 @@ db.once("open", () =>  console.log("connected to db"));
 
 const studentRoute = require("./routes/student_route");
 
-app.use(studentRoute);
+app.use("/students", studentRoute);
+app.use("/posts", postRoute);
 
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening at http://localhost:${process.env.PORT}`);
