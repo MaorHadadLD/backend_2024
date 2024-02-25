@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node App.js",
-    "dev": "nodemon App.js",
+    "start": "node Server.js",
+    "dev": "nodemon Server.js",
     "test": "jest --detectOpenHandles --forceExit"
   },
   "author": "Maor Hadad",
