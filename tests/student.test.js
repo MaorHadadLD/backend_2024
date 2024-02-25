@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../App');
+const mongoose = require('mongoose');
 
 
 
@@ -11,6 +12,7 @@ beforeAll((done) => {
 
 afterAll((done) => {
     console.log('After all tests')
+    mongoose.connect.close();
     done();
 });
 
