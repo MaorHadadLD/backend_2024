@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../App');
 const mongoose = require('mongoose');
-
+const Student = require('../models/studentModel');
 
 
 
@@ -21,5 +21,6 @@ describe("Student tests", () => {
         console.log('Test Student get all');
         const res = await request(app).get('/student');
         expect(res.statusCode).toBe(200);
+        const data = res.body;
     });
 });  
