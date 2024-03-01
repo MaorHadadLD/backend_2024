@@ -52,7 +52,17 @@ describe("Student ", () => {
         expect(data[0].name).toBe(students[0].name);
         expect(data[0]._id).toBe(students[0]._id);
         expect(data[0].age).toBe(students[0].age);
+    });
+
+    test("GET /student/:id", async () => {
+        const res = await request(app).get("/student/" + students[0]._id)
+          .set('Authorization', 'Bearer ' + testUser.accessToken);
+        expect(res.statusCode).toBe(200);
+        expect(res.body.name).toBe(students[0].name);
+        expect(res.body._id).toBe(students[0]._id);
+        expect(res.body.age).toBe(students[0].age);
       });
+
 
 
     
