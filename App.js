@@ -23,7 +23,4 @@ const initApp = () => {
     
 };
 
-
-
-
-module.exports = app;
+module.exports = initApp;
