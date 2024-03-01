@@ -61,7 +61,13 @@ describe("Student ", () => {
         expect(res.body.name).toBe(students[0].name);
         expect(res.body._id).toBe(students[0]._id);
         expect(res.body.age).toBe(students[0].age);
-      });
+    });
+
+    test("Fail GET /student/:id", async () => {
+        const res = await request(app).get("/student/00000")
+          .set('Authorization', 'Bearer ' + testUser.accessToken);
+        expect(res.statusCode).toBe(404);
+    });
 
 
 
