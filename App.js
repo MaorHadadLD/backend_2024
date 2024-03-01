@@ -10,17 +10,14 @@ const initApp = (callback) => {
     const db = mongoose.connection;
     db.on("error", (error) => console.error(error));
     db.once("open", () =>  console.log("connected to db"));
-    mongoose.connect(process.env.BASE_URL);
-
-
-    app.use(bodyParser.json());
+    mongoose.connect(process.env.BASE_URL).then(() => {
+        app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.use("/student", studentRoute);
     app.use("/post", postRoute);
     callback(app);
-
-
+    });
 };
 
 

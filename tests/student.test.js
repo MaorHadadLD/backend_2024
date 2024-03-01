@@ -1,13 +1,18 @@
 const request = require('supertest');
-const app = require('../App');
+const appInit = require('../App');
 const mongoose = require('mongoose');
 const Student = require('../models/studentModel');
 
 
-
-beforeAll(async () => {
-    console.log('Before all tests')
-    await Student.deleteMany();
+let app;
+beforeAll( (done) => {
+    appInit(async (app_) => {
+        app = app_;
+        console.log('Before all tests');
+        Student.deleteMany().them(() => {
+            done()
+        });
+    })
 });
 
 afterAll(async () => {
