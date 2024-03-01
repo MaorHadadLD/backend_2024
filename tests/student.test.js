@@ -5,15 +5,12 @@ const Student = require('../models/studentModel');
 
 
 let app;
-beforeAll( (done) => {
-    appInit(async (app_) => {
-        app = app_;
-        console.log('Before all tests');
-        Student.deleteMany().them(() => {
-            done()
-        });
-    })
+beforAll(async () => {
+    app = await appInit();
+    consol.log("beforAll");
+    await Student.deleteMany();
 });
+
 
 afterAll(async () => {
     console.log('After all tests')
