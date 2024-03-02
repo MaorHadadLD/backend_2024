@@ -24,4 +24,4 @@ const initApp = () => {
     
 };
 
-module.exports = initApp;
+export default initApp;
