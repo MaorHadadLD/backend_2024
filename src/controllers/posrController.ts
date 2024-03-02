@@ -1,9 +1,17 @@
 import Post from '../models/postModel';
 import { Request, Response } from 'express'
 import baseController from '../controllers/baseController';
+
 const getPost = async (req: Request, res: Response) => {
     console.log('getStudent');
     baseController.get(Post, req, res);
 };
 
-export default { getPost };
+const getPostById = async (req: Request, res: Response) => {
+    console.log(req.params.id);
+    baseController.getById(Post, req, res);
+};
+
+
+
+export default { getPost, getPostById};
