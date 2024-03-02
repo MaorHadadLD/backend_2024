@@ -17,6 +17,11 @@ const postPost = async (req: Request, res: Response) => {
     baseController.post(Post, req, res);
 };
 
+const putPost = (req: Request, res: Response) => {
+    console.log("student put");
+    res.status(400).send("Not implemented");
+};
 
 
-export default { getPost, getPostById, postPost};
+
+export default { getPost, getPostById, postPost, putPost};
