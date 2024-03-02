@@ -1,37 +1,12 @@
-import Student from '../models/studentModel';
-import { Request, Response } from 'express';
-import baseController from '../controllers/baseController';
+import Student from "../models/studentModel";
+import BaseController from "./baseController";
+import { IStudent } from "../models/studentModel";
 
-const getStudents = async (req: Request, res: Response) => {
-    console.log('getStudent');
-    baseController.get(Student, req, res);
-};
+class StudentController extends BaseController<IStudent> {
+  constructor() {
+    super(Student);
+  }
 
-const getStudentById = async (req: Request, res: Response) => {
-    console.log(req.params.id);
-    baseController.getById(Student, req, res);
-};
+}
 
-const postStudents = async (req: Request, res: Response) => {
-    console.log("student post");
-    baseController.post(Student, req, res);
-};
-
-
-const putStudents = (req: Request, res: Response) => {
-    console.log("student put");
-    res.status(400).send("Not implemented");
-};
-
-const deleteStudents = async (req, res) => {
-    console.log("student delete");
-    baseController.remove(Student, req, res);
-};
-
-export default {
-    getStudents,
-    getStudentById,
-    postStudents, 
-    putStudents, 
-    deleteStudents,
-};
+export default new StudentController();
