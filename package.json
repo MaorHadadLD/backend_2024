@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "tsc && node dist/Server.js",
+    "start": "tsc && node dist/src/Server.js",
     "dev": "nodemon ./src/Server.ts",
     "test": "jest --detectOpenHandles --forceExit",
     "lint": "eslint . --ext .ts"
