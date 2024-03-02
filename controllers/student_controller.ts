@@ -44,7 +44,8 @@ const postStudents = async (req: Request, res: Response) => {
 
 
 const putStudents = (req: Request, res: Response) => {
-    res.send("student put");
+    console.log("student put");
+    res.status(400).send("Not implemented");
 };
 
 const deleteStudents = async (req, res) => {
@@ -58,4 +59,10 @@ const deleteStudents = async (req, res) => {
     };
 };
 
-module.exports = {getStudents, getStudentById, postStudents, putStudents, deleteStudents};
+export default {
+    getStudents,
+    getStudentById,
+    postStudents, 
+    putStudents, 
+    deleteStudents,
+};
