@@ -1,20 +1,10 @@
 import Student from '../models/studentModel';
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
+import baseController from '../controllers/baseController';
 
 const getStudents = async (req: Request, res: Response) => {
     console.log('getStudent');
-    try {
-        let students;
-        if (req.query.name) {
-           students = await Student.find({name: req.query.name});
-        } else {
-            students = await Student.find();
-        }
-        res.status(200).send(students);
-    } catch (error) {
-        console.log(error);
-        res.status(400).send(error.message);
-    } 
+    baseController.get(Student, req, res);
 };
 
 const getStudentById = async (req: Request, res: Response) => {
