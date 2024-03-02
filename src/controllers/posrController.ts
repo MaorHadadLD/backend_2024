@@ -22,6 +22,17 @@ const putPost = (req: Request, res: Response) => {
     res.status(400).send("Not implemented");
 };
 
+const deletePost = async (req, res) => {
+    console.log("student delete");
+    baseController.remove(Post, req, res);
+};
 
 
-export default { getPost, getPostById, postPost, putPost};
+
+export default { 
+    getPost, 
+    getPostById, 
+    postPost, 
+    putPost, 
+    deletePost
+};
