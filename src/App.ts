@@ -6,9 +6,10 @@ import mongoose from "mongoose";
 import studentRoute from "./routes/studentRoute";
 import postRoute from "./routes/postRoute";
 import bodyParser from "body-parser";
+import { Express } from "express";
 
 const initApp = () => {
-    const promise = new Promise(async (resolve, reject) => {
+    const promise = new Promise<Express>(async (resolve, reject) => {
         const db = mongoose.connection;
         db.on("error", (error) => console.error(error));
         db.once("open", () =>  console.log("connected to db"));
@@ -18,7 +19,7 @@ const initApp = () => {
 
         app.use("/student", studentRoute);
         app.use("/post", postRoute);
-        resolve();
+        resolve(app);
     });
     return promise;
     
