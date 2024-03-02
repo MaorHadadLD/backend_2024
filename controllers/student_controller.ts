@@ -1,7 +1,7 @@
-const Student = require('../models/studentModel');
+import Student from '../models/studentModel';
+import { Request, Response } from 'express'
 
-
-const getStudents = async (req, res) => {
+const getStudents = async (req: Request, res: Response) => {
     console.log('getStudent');
     try {
         let students;
@@ -17,7 +17,7 @@ const getStudents = async (req, res) => {
     } 
 };
 
-const getStudentById = async (req, res) => {
+const getStudentById = async (req: Request, res: Response) => {
     console.log(req.params.id);
     try{
         const student = await Student.findById(req.params.id);
@@ -32,7 +32,7 @@ const getStudentById = async (req, res) => {
     }
 };
 
-const postStudents = async (req, res) => {
+const postStudents = async (req: Request, res: Response) => {
     console.log("student post");
     try{
         const student = await Student.create(req.body);
@@ -43,7 +43,7 @@ const postStudents = async (req, res) => {
 };
 
 
-const putStudents = (req, res) => {
+const putStudents = (req: Request, res: Response) => {
     res.send("student put");
 };
 
