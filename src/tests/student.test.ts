@@ -1,13 +1,13 @@
-const request = require('supertest');
-const appInit = require('../App');
-const mongoose = require('mongoose');
-const Student = require('../models/studentModel');
+import request from 'supertest';
+import appInit from '../App';
+import mongoose from 'mongoose';
+import Student from '../models/studentModel';
+import { Express } from 'express';
 
-
-let app;
-beforAll(async () => {
+let app: Express;
+beforeAll(async () => {
     app = await appInit();
-    consol.log("beforAll");
+    console.log("beforAll");
     await Student.deleteMany();
 });
 
