@@ -1,7 +1,11 @@
-import Student from '../models/studentModel';
 import { Request, Response } from 'express'
 
-const get = async (ItemModel, req: Request, res: Response) => {
+class BaseController {
+    ItemModel: any;
+    constructor(ItemModel: any) {
+        this.ItemModel = ItemModel;
+    }
+    async get =  (req: Request, res: Response) {
     console.log('get');
     try {
         if (req.query.name) {
@@ -16,8 +20,7 @@ const get = async (ItemModel, req: Request, res: Response) => {
         console.log(error);
         res.status(400).send(error.message);
     } 
-};
-
+    }
 const getById = async (ItemModel,req: Request, res: Response) => {
     console.log(req.params.id);
     try{
@@ -59,11 +62,6 @@ const remove = async (ItemModel,req, res) => {
         res.status(400).send(error.message);
     };
 };
+}
 
-export default {
-    get,
-    getById,
-    post, 
-    put, 
-    remove
-};
+export default BaseController;

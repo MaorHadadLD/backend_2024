@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 
+export interface IStudent {
+    name: string;
+    _id: string;
+    age: number;
+}
 const studentSchema = new mongoose.Schema ({
     name: {
         type : String,
