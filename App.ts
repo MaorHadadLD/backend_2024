@@ -1,10 +1,11 @@
 import express from "express";
 const app = express();
-const dotenv = require("dotenv").config();
-const mongoose = require("mongoose");
-const studentRoute = require("./routes/studentRoute");
-const postRoute = require("./routes/postRoute");
-const bodyParser = require("body-parser");
+import dotenv from "dotenv"
+dotenv.config();
+import mongoose from "mongoose";
+import studentRoute from "./routes/studentRoute";
+import postRoute from "./routes/postRoute";
+import bodyParser from "body-parser";
 
 const initApp = () => {
     const promise = new Promise(async (resolve, reject) => {
