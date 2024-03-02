@@ -1,16 +1,14 @@
 import express from "express";
 const router = express.Router();
-import StudentController from '../controllers/student_controller';
+import StudentController from "../controllers/student_controller";
 
-router.get("/", StudentController.getStudents);
+router.get("/",  StudentController.get.bind(StudentController));
+router.get("/:id", StudentController.getById.bind(StudentController));
 
-router.get("/:id", StudentController.getStudentById);
+router.post("/",  StudentController.post.bind(StudentController));
 
-router.post("/", StudentController.postStudents);
+router.put("/:id",  StudentController.put.bind(StudentController));
 
-router.put("/:id", StudentController.putStudents);
-
-router.delete("/:id", StudentController.deleteStudents);
-
+router.delete("/:id",  StudentController.remove.bind(StudentController));
 
 export default router;
