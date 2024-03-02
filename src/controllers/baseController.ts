@@ -18,20 +18,20 @@ const get = async (ItemModel, req: Request, res: Response) => {
     } 
 };
 
-// const getStudentById = async (req: Request, res: Response) => {
-//     console.log(req.params.id);
-//     try{
-//         const student = await Student.findById(req.params.id);
-//         if (student) {
-//             res.status(200).send(student);
-//         } else {
-//             res.status(404).send("Student not found");
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         res.status(400).send(error.message);
-//     }
-// };
+const getById = async (ItemModel,req: Request, res: Response) => {
+    console.log(req.params.id);
+    try{
+        const item = await ItemModel.findById(req.params.id);
+        if (item) {
+            res.status(200).send(item);
+        } else {
+            res.status(404).send("not found");
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error.message);
+    }
+};
 
 // const postStudents = async (req: Request, res: Response) => {
 //     console.log("student post");
@@ -62,7 +62,7 @@ const get = async (ItemModel, req: Request, res: Response) => {
 
 export default {
     get,
-    // getStudentById,
+    getById,
     // postStudents, 
     // putStudents, 
     // deleteStudents,
