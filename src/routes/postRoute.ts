@@ -4,19 +4,12 @@ import posrController from "../controllers/posrController";
 
 router.get("/", posrController.getPost);
 
-router.get("/:id", (req, res) => {
-    res.send("post get by id");
-});
+router.get("/:id", posrController.getPostById);
 
-router.post("/", (req, res) => {
-    res.send("post post" + req.body);
-});
+router.post("/", posrController.postPost);
 
-router.put("/:id", (req, res) => {
-    res.send("post put");
-});
+router.put("/:id", posrController.putPost);
 
-router.delete("/:id", (req, res) => {
-    res.send("post delete");
-});
+router.delete("/:id", posrController.deletePost);
+
 export default router;
