@@ -12,6 +12,11 @@ const getPostById = async (req: Request, res: Response) => {
     baseController.getById(Post, req, res);
 };
 
+const postPost = async (req: Request, res: Response) => {
+    console.log("student post");
+    baseController.post(Post, req, res);
+};
 
 
-export default { getPost, getPostById};
+
+export default { getPost, getPostById, postPost};
