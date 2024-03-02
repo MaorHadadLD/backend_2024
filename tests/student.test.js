@@ -68,9 +68,5 @@ describe("Student ", () => {
           .set('Authorization', 'Bearer ' + testUser.accessToken);
         expect(res.statusCode).toBe(404);
     });
-
-
-
-    
 });
 
