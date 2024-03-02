@@ -44,7 +44,7 @@ const post = async (ItemModel,req: Request, res: Response) => {
 };
 
 
-const putStudents = (ItemModel,req: Request, res: Response) => {
+const put = (ItemModel,req: Request, res: Response) => {
     console.log("student put");
     res.status(400).send("Not implemented");
 };
@@ -64,6 +64,6 @@ export default {
     get,
     getById,
     post, 
-    // putStudents, 
+    put, 
     // deleteStudents,
 };
