@@ -9,17 +9,18 @@ import bodyParser from "body-parser";
 import { Express } from "express";
 
 const initApp = () => {
-    const promise = new Promise<Express>(async (resolve, reject) => {
+    const promise = new Promise<Express>((resolve, reject) => {
         const db = mongoose.connection;
         db.on("error", (error) => console.error(error));
         db.once("open", () =>  console.log("connected to db"));
-        await mongoose.connect(process.env.BASE_URL)
+        mongoose.connect(process.env.BASE_URL).then(() => {
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
 
         app.use("/student", studentRoute);
         app.use("/post", postRoute);
         resolve(app);
+        });
     });
     return promise;
     
