@@ -1,9 +1,8 @@
 import express from "express";
 const router = express.Router();
+import posrController from "../controllers/posrController";
 
-router.get("/", (req, res) => {
-    res.send("post get");
-});
+router.get("/", posrController.getPost);
 
 router.get("/:id", (req, res) => {
     res.send("post get by id");
