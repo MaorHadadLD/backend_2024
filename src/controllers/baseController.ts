@@ -33,37 +33,37 @@ const getById = async (ItemModel,req: Request, res: Response) => {
     }
 };
 
-// const postStudents = async (req: Request, res: Response) => {
-//     console.log("student post");
-//     try{
-//         const student = await Student.create(req.body);
-//         res.status(201).send(student);
-//     } catch (error) {
-//         res.status(400).send(error.massage);
-//     }
-// };
+const post = async (ItemModel,req: Request, res: Response) => {
+    console.log("post");
+    try{
+        const item = await ItemModel.create(req.body);
+        res.status(201).send(item);
+    } catch (error) {
+        res.status(400).send(error.massage);
+    }
+};
 
 
-// const putStudents = (req: Request, res: Response) => {
-//     console.log("student put");
-//     res.status(400).send("Not implemented");
-// };
+const putStudents = (ItemModel,req: Request, res: Response) => {
+    console.log("student put");
+    res.status(400).send("Not implemented");
+};
 
-// const deleteStudents = async (req, res) => {
-//     res.send("student delete");
-//     try {
-//         await Student.findByIdAndDelete(req.params.id);     
-//         return res.status(200).send();  
-//     } catch (error) {
-//         console.log(error);
-//         res.status(400).send(error.message);
-//     };
-// };
+const deleteStudents = async (ItemModel,req, res) => {
+    res.send("student delete");
+    try {
+        await ItemModel.findByIdAndDelete(req.params.id);     
+        return res.status(200).send();  
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error.message);
+    };
+};
 
 export default {
     get,
     getById,
-    // postStudents, 
+    post, 
     // putStudents, 
     // deleteStudents,
 };
