@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node Server.js",
-    "dev": "nodemon Server.js",
-    "test": "jest --detectOpenHandles --forceExit"
+    "start": "tsc && node dist/Server.js",
+    "dev": "nodemon ./src/Server.ts",
+    "test": "jest --detectOpenHandles --forceExit",
+    "lint": "eslint . --ext .ts"
   },
   "author": "Maor Hadad",
   "license": "ISC",
