@@ -49,7 +49,7 @@ const put = (ItemModel,req: Request, res: Response) => {
     res.status(400).send("Not implemented");
 };
 
-const deleteStudents = async (ItemModel,req, res) => {
+const remove = async (ItemModel,req, res) => {
     res.send("student delete");
     try {
         await ItemModel.findByIdAndDelete(req.params.id);     
@@ -65,5 +65,5 @@ export default {
     getById,
     post, 
     put, 
-    // deleteStudents,
+    remove
 };
