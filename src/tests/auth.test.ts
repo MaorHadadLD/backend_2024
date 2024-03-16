@@ -1,7 +1,7 @@
 import request from 'supertest';
 import appInit from '../App';
 import mongoose from 'mongoose';
-import { Express } from 'express';
+import e, { Express } from 'express';
 import User from '../models/userModel';
 
 const user = {
@@ -32,6 +32,12 @@ describe("Auth test ", () => {
         const res = await request(app).post('/auth/login').send(user);
         expect(res.statusCode).toBe(200);
         console.log(res.body);
+
+        const accessToken = res.body.accessToken;
+        expect(accessToken).toBeNull();
+
+        const res2 = await request(app).get('/student').set('Authorization', 'Bearer ' + accessToken);
+        expect(res2.statusCode).toBe(200);
     });
 });
 
