@@ -10,7 +10,7 @@ import { Express } from "express";
 import authRoute from "./routes/authRoute";
 
 const initApp = () => {
-    const promise = new Promise<Express>((resolve, reject) => {
+    const promise = new Promise<Express>((resolve) => {
         const db = mongoose.connection;
         db.on("error", (error) => console.error(error));
         db.once("open", () =>  console.log("connected to db"));
