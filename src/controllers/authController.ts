@@ -8,7 +8,12 @@ const login = (req: Request, res: Response) => {
     res.status(400).send("login");
 };
 
+const logout = (req: Request, res: Response) => {
+    res.status(400).send("logout");
+};
+
 export default {
     register,
-    login
+    login,
+    logout
 };

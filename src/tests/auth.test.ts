@@ -33,8 +33,8 @@ describe("Auth test ", () => {
     test("Post /register", async () => {
         const res = await request(app).post('/auth/register').send(
             {
-                email: "test2@gmail.com",
-                password: "123456"
+               "email": "test2@gmail.com",
+                "password": "123456"
             }
         );
         expect(res.statusCode).toBe(200);
