@@ -55,7 +55,7 @@ const login = async (req: Request, res: Response) => {
             return res.status(400).send("invalid password");
         }
 
-        const accessToken = await jwt.sign({
+        const accessToken = jwt.sign({
              _id: user._id 
             }, process.env.TOKEN_SECRE, {
                 expiresIn: process.env.TOKEN_EXPIRES
