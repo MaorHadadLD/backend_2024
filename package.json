@@ -8,6 +8,7 @@
     "dev": "nodemon ./src/Server.ts",
     "test": "jest --detectOpenHandles --forceExit",
     "testStudent": "jest --detectOpenHandles --forceExit ./src/tests/student.test.ts",
+    "testAuth": "jest --detectOpenHandles --forceExit ./src/tests/auth.test.ts",
     "lint": "eslint . --ext .ts"
   },
   "author": "Maor Hadad",
