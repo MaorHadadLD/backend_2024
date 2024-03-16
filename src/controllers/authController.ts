@@ -66,7 +66,7 @@ const login = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(400).send(error.message);
+        return res.status(400).send(error.message);
     }
 };
 

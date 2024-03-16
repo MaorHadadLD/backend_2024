@@ -2,11 +2,18 @@ import request from 'supertest';
 import appInit from '../App';
 import mongoose from 'mongoose';
 import { Express } from 'express';
+import User from '../models/userModel';
+
+const user = {
+    email: "test2@gmail.com",
+    password: "123456"
+}
 
 let app: Express;
 beforeAll(async () => {
     app = await appInit();
     console.log("beforAll");
+    await User.deleteMany({email: user.email});
 });
 
 
@@ -15,29 +22,16 @@ afterAll(async () => {
     await mongoose.connection.close();
 });
 
-
-// const students = [
-//     {
-//         name: 'John Doe',
-//         _id : '12345',
-//         age : 22
-//     },
-//     {
-//         name: 'Jane Doe',
-//         _id: '12346',
-//         age: 23
-//     }
-// ];
-
 describe("Auth test ", () => {
     test("Post /register", async () => {
-        const res = await request(app).post('/auth/register').send(
-            {
-               "email": "test2@gmail.com",
-                "password": "123456"
-            }
-        );
+        const res = await request(app).post('/auth/register').send(user);
         expect(res.statusCode).toBe(200);
+    });
+
+    test("Post /login", async () => {
+        const res = await request(app).post('/auth/login').send(user);
+        expect(res.statusCode).toBe(200);
+        console.log(res.body);
     });
 });
 
