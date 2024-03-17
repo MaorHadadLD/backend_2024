@@ -27,7 +27,7 @@ const register = async (req: Request, res: Response) => {
         });
 
         return res.status(200).send(newUser);
-        
+
     } catch (error) {
         console.error(error);
         res.status(400).send(error.message);
@@ -44,7 +44,7 @@ const login = async (req: Request, res: Response) => {
         return res.status(400).send("missing email or password");
     }
 
-    try {   
+    try {
         const user = await User.findOne({ email: email });
         if (user == null) {
             return res.status(400).send("invalid email or password");
@@ -56,13 +56,24 @@ const login = async (req: Request, res: Response) => {
         }
 
         const accessToken = jwt.sign({
-             _id: user._id 
-            }, process.env.TOKEN_SECRE, {
-                expiresIn: process.env.TOKEN_EXPIRES
-            });
+            _id: user._id
+        }, process.env.TOKEN_SECRET, {
+            expiresIn: process.env.TOKEN_EXPIRES
+        });
 
+        const refreshToken = jwt.sign({
+            _id: user._id
+        }, process.env.REFRESH_TOKEN_SECRET);
+
+        if(user.tokens == null) {
+            user.tokens = [refreshToken];
+        } else {
+            user.tokens.push(refreshToken);
+        }
+        await user.save();
         return res.status(200).send({
-            accessToken: accessToken
+            accessToken: accessToken,
+            refreshToken: refreshToken
         });
     } catch (error) {
         console.error(error);
