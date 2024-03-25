@@ -1,6 +1,6 @@
 import request from 'supertest';
 import appInit from '../App';
-import mongoose from 'mongoose';
+import mongoose, { set } from 'mongoose';
 import { Express } from 'express';
 import User from '../models/userModel';
 
@@ -47,6 +47,12 @@ describe("Auth test ", () => {
         expect(res3.statusCode).not.toBe(200);
     });
 
+    const timeout = (ms: Number) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, 6000);
+        });
+    }
+
     test("refresh token", async () => {
         const res = await request(app).post('/auth/login').send(user);
         expect(res.statusCode).toBe(200);
@@ -68,7 +74,10 @@ describe("Auth test ", () => {
         const res3 = await request(app).get('/student')
         .set('Authorization', 'Bearer ' + accessToken2);
         expect(res3.statusCode).toBe(200); 
+
+        //sleep for 6s
     });
+       
 });
 
 
