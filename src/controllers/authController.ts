@@ -72,17 +72,7 @@ const login = async (req: Request, res: Response) => {
             return res.status(400).send("invalid password");
         }
 
-        const accessToken = jwt.sign({
-            _id: user._id
-        }, process.env.TOKEN_SECRET, {
-            expiresIn: process.env.TOKEN_EXPIRES
-        });
-
-        const refreshToken = jwt.sign({
-            _id: user._id
-        }, process.env.REFRESH_TOKEN_SECRET, {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRATION
-        });
+        const { accessToken, refreshToken } = generateTokens(user._id.toString());
 
         if (user.tokens == null) {
             user.tokens = [refreshToken];
@@ -95,7 +85,7 @@ const login = async (req: Request, res: Response) => {
             refreshToken: refreshToken
         });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return res.status(400).send(error.message);
     }
 };
