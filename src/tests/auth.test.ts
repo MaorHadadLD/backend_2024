@@ -34,7 +34,10 @@ describe("Auth test ", () => {
         console.log(res.body);
 
         const accessToken = res.body.accessToken;
+        const refreshToken = res.body.refreshToken;
         expect(accessToken).toBeNull();
+        expect(refreshToken).toBeNull();
+
 
         const res2 = await request(app).get('/student').set('Authorization', 'Bearer ' + accessToken);
         expect(res2.statusCode).toBe(200); 
