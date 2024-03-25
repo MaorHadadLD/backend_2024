@@ -1,6 +1,6 @@
 import request from 'supertest';
 import appInit from '../App';
-import mongoose, { set } from 'mongoose';
+import mongoose from 'mongoose';
 import { Express } from 'express';
 import User from '../models/userModel';
 

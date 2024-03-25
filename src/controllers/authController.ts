@@ -34,6 +34,23 @@ const register = async (req: Request, res: Response) => {
     }
 };
 
+const generateTokens = (userId: string): { accessToken: string, refreshToken: string } => {
+    const accessToken = jwt.sign({
+        _id: userId
+    }, process.env.TOKEN_SECRET, {
+        expiresIn: process.env.TOKEN_EXPIRATION
+    });
+
+    const refreshToken = jwt.sign({
+        _id: userId,
+        salt: Math.random()
+    }, process.env.REFRESH_TOKEN_SECRET);
+
+    return {
+        accessToken: accessToken,
+        refreshToken: refreshToken
+    }
+}
 const login = async (req: Request, res: Response) => {
     res.status(400).send("login");
 
@@ -90,52 +107,42 @@ const logout = async (req: Request, res: Response) => {
 const refresh = (req: Request, res: Response) => {
     //extract token from http header
     const authHeader = req.headers['authorization'];
-    const refreshToken = authHeader && authHeader.split(' ')[1];
+    const refreshTokenOrig = authHeader && authHeader.split(' ')[1];
 
-    if (refreshToken == null) {
+    if (refreshTokenOrig == null) {
         return res.status(401).send("missing token");
     }
 
     //verify token
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, userInfo:{_id: String}) => {
+    jwt.verify(refreshTokenOrig, process.env.REFRESH_TOKEN_SECRET, async (err, userInfo:{_id: String}) => {
         if (err) {
             return res.status(403).send("invalid token");
         }
         try{
         const user =  await User.findById(userInfo._id);
-        if (user == null || user.tokens == null || !user.tokens.includes(refreshToken)) {
+        if (user == null || user.tokens == null || !user.tokens.includes(refreshTokenOrig)) {
             if (user.tokens != null) {
                 user.tokens = [];
                 await user.save();
             }
             return res.status(403).send("invalid token");
         }
-        //generate new access token
-        const accessToken = jwt.sign({
-            _id: user._id
-        }, process.env.TOKEN_SECRET, {
-            expiresIn: process.env.TOKEN_EXPIRES
-        });
 
-        //generate new refresh token
-        const newRefreshToken = jwt.sign({
-            _id: user._id
-        }, process.env.REFRESH_TOKEN_SECRET, {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRATION
-        });
+        //generate new access token
+        const { accessToken, refreshToken } = generateTokens(user._id.toString());
         
         //update refresh token in db
-        user.tokens = user.tokens.filter((token) => token !== refreshToken);
-        user.tokens.push(newRefreshToken);
+        user.tokens = user.tokens.filter(token => token != refreshTokenOrig);
+        user.tokens.push(refreshToken);
         await user.save();
 
-        //return new access token and refresh token
+        //return new access token & new refresh token
         return res.status(200).send({
             accessToken: accessToken,
-            refreshToken: newRefreshToken
+            refreshToken: refreshToken
         });
-    }catch(error){
-        console.error(error);
+    } catch (error) {
+        console.log(error);
         return res.status(400).send(error.message);
     }
     });

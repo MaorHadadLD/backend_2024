@@ -1,17 +1,17 @@
 import express from "express";
 const router = express.Router();
-import posrController from "../controllers/posrController";
+import postController from "../controllers/postController";
 import authMiddleware from "../controllers/common/authMiddleware";
 
 
-router.get("/", posrController.get.bind(posrController));
+router.get("/", postController.get.bind(postController));
 
-router.get("/:id", posrController.getById.bind(posrController));
+router.get("/:id", postController.getById.bind(postController));
 
-router.post("/", authMiddleware, posrController.post.bind(posrController));
+router.post("/", authMiddleware, postController.post.bind(postController));
 
-router.put("/:id", posrController.put.bind(posrController));
+router.put("/:id", postController.put.bind(postController));
 
-router.delete("/:id", posrController.remove.bind(posrController));
+router.delete("/:id", postController.remove.bind(postController));
 
 export default router;
