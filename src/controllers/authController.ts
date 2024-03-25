@@ -63,7 +63,9 @@ const login = async (req: Request, res: Response) => {
 
         const refreshToken = jwt.sign({
             _id: user._id
-        }, process.env.REFRESH_TOKEN_SECRET);
+        }, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRATION
+        });
 
         if (user.tokens == null) {
             user.tokens = [refreshToken];
@@ -118,7 +120,9 @@ const refresh = (req: Request, res: Response) => {
         //generate new refresh token
         const newRefreshToken = jwt.sign({
             _id: user._id
-        }, process.env.REFRESH_TOKEN_SECRET);
+        }, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRATION
+        });
         
         //update refresh token in db
         user.tokens = user.tokens.filter((token) => token !== refreshToken);

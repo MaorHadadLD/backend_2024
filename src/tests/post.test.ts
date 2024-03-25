@@ -38,5 +38,18 @@ describe("Student ", () => {
         const data = res.body;
         expect(data).toEqual([]);
     });
+
+    const post = {
+        title: 'Post 1',
+        content: 'Content 1',
+        owner: 'Owner 1'
+    }
+
+    test("Post /post - empty collection", async () => {
+        const res = await request(app).post('/post').send(post);
+        expect(res.statusCode).toBe(200);
+        const data = res.body;
+        expect(data).toEqual([]);
+    });
 });
 
