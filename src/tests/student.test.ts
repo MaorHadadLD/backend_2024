@@ -44,7 +44,8 @@ const students = [
 
 describe("Student ", () => {
     test("Get /student - empty collection", async () => {
-        const res = await request(app).get('/student').set('Authorization', 'Bearer ' + testUser.accessToken);
+        const res = await request(app).get('/student')
+        .set('Authorization', 'Bearer ' + testUser.accessToken);
         expect(res.statusCode).toBe(200);
         const data = res.body;
         expect(data).toEqual([]);
