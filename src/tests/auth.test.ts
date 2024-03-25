@@ -37,7 +37,11 @@ describe("Auth test ", () => {
         expect(accessToken).toBeNull();
 
         const res2 = await request(app).get('/student').set('Authorization', 'Bearer ' + accessToken);
-        expect(res2.statusCode).toBe(200);
+        expect(res2.statusCode).toBe(200); 
+
+        const fakeToken = accessToken + "0";
+        const res3 = await request(app).get('/student').set('Authorization', 'Bearer ' + fakeToken);
+        expect(res3.statusCode).not.toBe(200);
     });
 });
 
