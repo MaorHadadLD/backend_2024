@@ -1,7 +1,7 @@
 import request from 'supertest';
 import appInit from '../App';
 import mongoose from 'mongoose';
-import e, { Express } from 'express';
+import { Express } from 'express';
 import User from '../models/userModel';
 
 const user = {
